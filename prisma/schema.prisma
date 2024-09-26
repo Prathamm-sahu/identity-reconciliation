@@ -28,12 +28,12 @@ enum LinkPrecedence {
 }
 
 model Contact {
-  id              String         @id @default(cuid())
+  id              Int         @id @default(autoincrement())
   phoneNumber     String?
   email           String?
   userId          String
   user            User           @relation(fields: [userId], references: [id])
-  linkedContactId String?
+  linkedContactId Int?
   linkedContact   Contact?       @relation("linkedContact", fields: [linkedContactId], references: [id])
   linkedContacts  Contact[]      @relation("linkedContact")
   linkPrecedence  LinkPrecedence
