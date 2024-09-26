@@ -15,8 +15,8 @@ datasource db {
 
 model User {
   id        String    @id @default(cuid())
-  name      String
-  email     String
+  name      String?
+  email     String?   @unique
   createdAt DateTime  @default(now())
   updatedAt DateTime  @updatedAt
   contacts  Contact[]
@@ -29,12 +29,12 @@ enum LinkPrecedence {
 
 model Contact {
   id              String         @id @default(cuid())
-  phoneNumber     String
-  email           String
+  phoneNumber     String?
+  email           String?
   userId          String
   user            User           @relation(fields: [userId], references: [id])
-  linkedContactId String
-  linkedContact   Contact        @relation("linkedContact", fields: [linkedContactId], references: [id])
+  linkedContactId String?
+  linkedContact   Contact?       @relation("linkedContact", fields: [linkedContactId], references: [id])
   linkedContacts  Contact[]      @relation("linkedContact")
   linkPrecedence  LinkPrecedence
   createdAt       DateTime       @default(now())
