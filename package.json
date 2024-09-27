@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "start": "node dist/index.ts",
+    "build": "npm install && prisma generate && npx tsc -b",
+    "postinstall": "prisma generate"
   },
   "keywords": [],
   "author": "",
