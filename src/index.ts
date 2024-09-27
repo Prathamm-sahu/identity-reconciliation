@@ -2,6 +2,8 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 import dotenv from "dotenv";
 import prisma from "./lib/db";
+import { IdentityValidator } from "./lib/validators/identity";
+import { z } from "zod";
 dotenv.config();
 const PORT = process.env.PORT || 3000;
 
@@ -11,7 +13,7 @@ app.use(express.json());
 
 app.post("/api/identity", async (req: Request, res: Response) => {
   try {
-    const { email, phoneNumber } = req.body;
+    const { email, phoneNumber } = IdentityValidator.parse(req.body);
     console.log(email, phoneNumber);
 
     const contacts = await prisma.contact.findMany({
@@ -258,6 +260,11 @@ app.post("/api/identity", async (req: Request, res: Response) => {
     res.send("hello");
     return;
   } catch (error) {
+    if(error instanceof z.ZodError) {
+      res.status(400).json({
+        error: error
+      })
+    }
     console.log(error);
   }
 });
