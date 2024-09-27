@@ -11,6 +11,10 @@ const app = express();
 
 app.use(express.json());
 
+app.get("/", (req: Request, res: Response) => {
+  res.send("Welcome to the bitspeed server, Server is up and running")
+})
+
 app.post("/identify", async (req: Request, res: Response) => {
   try {
     const { email, phoneNumber } = IdentityValidator.parse(req.body);
@@ -257,7 +261,7 @@ app.post("/identify", async (req: Request, res: Response) => {
       return;
     }
 
-    res.send("hello");
+    res.send("Out of scope.");
     return;
   } catch (error) {
     if(error instanceof z.ZodError) {
