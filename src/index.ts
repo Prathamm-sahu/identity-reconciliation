@@ -77,7 +77,7 @@ app.post("/api/identity", async (req: Request, res: Response) => {
       return;
     }
 
-    // If Phone number is same but the email is different and the contact is secondary
+    // If Phone number is same but the email is different and the contact is secondary and there is only one contact available in database
 
     if(contacts.length === 1 && contacts[0].linkPrecedence === "secondary") {
       if(phoneNumber === contacts[0].phoneNumber && email !== contacts[0].email) {
