@@ -13,15 +13,6 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model User {
-  id        String    @id @default(cuid())
-  name      String?
-  email     String?   @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  contacts  Contact[]
-}
-
 enum LinkPrecedence {
   primary
   secondary
@@ -31,8 +22,6 @@ model Contact {
   id              Int         @id @default(autoincrement())
   phoneNumber     String?
   email           String?
-  userId          String
-  user            User           @relation(fields: [userId], references: [id])
   linkedContactId Int?
   linkedContact   Contact?       @relation("linkedContact", fields: [linkedContactId], references: [id])
   linkedContacts  Contact[]      @relation("linkedContact")
