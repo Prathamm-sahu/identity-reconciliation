@@ -11,7 +11,7 @@ const app = express();
 
 app.use(express.json());
 
-app.post("/api/identity", async (req: Request, res: Response) => {
+app.post("/identify", async (req: Request, res: Response) => {
   try {
     const { email, phoneNumber } = IdentityValidator.parse(req.body);
     console.log(email, phoneNumber);
