@@ -269,4 +269,4 @@ app.post("/api/identity", async (req: Request, res: Response) => {
   }
 });
 
-app.listen(3000, () => console.log(`Server started on PORT:${PORT}`));
+app.listen(PORT, () => console.log(`Server started on PORT:${PORT}`));
